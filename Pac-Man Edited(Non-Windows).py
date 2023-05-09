@@ -5,10 +5,6 @@
 from random import choice
 from turtle import *
 from freegames import floor, vector
-import pygame
-
-pygame.init()
-pygame.mixer.init()
 
 
 state = {'score': 0}
@@ -133,7 +129,7 @@ def move():
         pacman.move(aim)
 
     index = offset(pacman)
-    # Added winning text and a winning sound to the two tile when it is touched by Pac-man
+    # Added winning text to the two tile when it is touched by Pac-man
     if tiles[index] == 2:
         tiles[index] = 3
         winner = Turtle()
@@ -141,8 +137,6 @@ def move():
         winner.color('yellow')
         style = ('Bauhaus 93', 45, 'italic')
         winner.write('You Won!', font=style, align='center')
-        sound1 = pygame.mixer.Sound("olg-winner-gagnant.wav")
-        sound1.play()
 
         return
 
@@ -172,14 +166,11 @@ def move():
     for point, course in ghosts:
         if abs(pacman - point) < 20:
             # When pac-man comes into contact with a ghost, a message displaying "You lost!" will pop up and pacman
-            # death sound will play this will also end the code.
             loser = Turtle()
             loser.penup()
             loser.color('red')
             style = ('Bauhaus 93', 45, 'italic')
             loser.write('You Lost!', font=style, align='center')
-            sound2 = pygame.mixer.Sound("pacman_death.wav")
-            sound2.play()
 
             return
 
@@ -204,9 +195,6 @@ onkey(lambda: change(5, 0), 'Right')
 onkey(lambda: change(-5, 0), 'Left')
 onkey(lambda: change(0, 5), 'Up')
 onkey(lambda: change(0, -5), 'Down')
-# this function adds a sound when the game starts up.
-sound3= pygame.mixer.Sound("pacman_beginning.wav")
-sound3.play()
 world()
 move()
 done()
